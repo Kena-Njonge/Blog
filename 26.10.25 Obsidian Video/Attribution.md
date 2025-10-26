@@ -106,8 +106,7 @@ No modifications made.
 
 **Screenshots** of the Termux GitHub page, Google Play Store page, and F-Droid page — used for commentary and illustration.
 
-
-
+Icons: “device-phone-mobile” and “tv” from Heroicons by Tailwind Labs. Licensed under the MIT License
 
 
 
