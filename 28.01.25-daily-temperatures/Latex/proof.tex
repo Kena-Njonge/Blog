@@ -1,0 +1,84 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\title{Amortized Analysis of a Pointer--Jumping Solution to \emph{Daily Temperatures}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\paragraph{Model.}
+We process days right-to-left. On iteration $k$ we may follow a sequence of \emph{pointer jumps}
+along a chain of previously created nodes until we find an appropriate attachment point, then we append a new node as the new head. Let $h_k$ be the number of pointer jumps performed on iteration $k$.
+All other work per iteration is bounded by a constant $A$. Let $b\ge 1$ be the constant cost of one jump.
+Thus the actual cost satisfies
+\[
+c_k \;\le\; b\,h_k + A.
+\]
+
+\paragraph{Potential.}
+Let $C_k$ be the active chain after iteration $k$, and define the potential
+\[
+\Phi_k \;=\; |C_k|\qquad (k\ge 0),
+\]
+with $\Phi_0 = 0$. Clearly $\Phi_k \ge 0$ for all $k$.
+
+\begin{lemma}[Chain Shortening]
+For every $k\ge 1$,
+\[
+|C_k| \;\le\; |C_{k-1}| \;-\; h_k \;+\; 1,
+\qquad\text{equivalently}\qquad
+\Delta\Phi_k \;\le\; 1 - h_k.
+\]
+\end{lemma}
+
+\begin{proof}
+During iteration $k$ we traverse $h_k$ pointers from the head of $C_{k-1}$.
+Those $h_k$ head nodes are no longer on the path from the new head to the tail in $C_k$.
+We then attach the new node as the head, increasing the path length by $1$.
+No cycles are created and no other nodes are added or removed from the path.
+Hence the inequality.
+\end{proof}
+
+\begin{theorem}[Amortized $O(1)$ time per iteration]
+Define the amortized cost $\widehat c_k = c_k + \Delta\Phi_k$.
+Then $\widehat c_k \le A + (b-1)$ for all $k$, and the total actual cost over $n$ iterations satisfies
+\[
+\sum_{k=1}^n c_k \;\le\; \big(A + (b-1)\big)\,n.
+\]
+\end{theorem}
+
+\begin{proof}
+By the lemma, $\Delta\Phi_k \le 1 - h_k$, hence
+\[
+\widehat c_k \;=\; c_k + \Delta\Phi_k
+\;\le\; (b\,h_k + A) + (1 - h_k)
+\;=\; A + (b-1).
+\]
+Summing and using telescoping of the potential gives
+\[
+\sum_{k=1}^n c_k
+\;=\; \sum_{k=1}^n \widehat c_k - (\Phi_n - \Phi_0)
+\;\le\; \big(A + (b-1)\big)\,n - \Phi_n
+\;\le\; \big(A + (b-1)\big)\,n.\qedhere
+\]
+\end{proof}
+
+\begin{theorem}[Bound on pointer jumps]
+The total number of pointer jumps satisfies $\sum_{k=1}^n h_k \le n$.
+\end{theorem}
+
+\begin{proof}
+From $\Delta\Phi_k \le 1 - h_k$ we have $h_k \le 1 - \Delta\Phi_k$.
+Summing and telescoping yields
+\[
+\sum_{k=1}^n h_k \;\le\; n - \sum_{k=1}^n \Delta\Phi_k
+= n - (\Phi_n - \Phi_0) \le n.
+\]
+\end{proof}
+
+\end{document}
