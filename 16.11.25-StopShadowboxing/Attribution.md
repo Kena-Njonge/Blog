@@ -1,5 +1,14 @@
 # The following sources were used in this video (unordered). 
 
+# Music
+
+“Cocktail Lounge” by Dyalla; “No Rush” by Dyalla; “Kicking It” by Dyalla; and “Aqua Cristalina” by Quincas Moreira.
+All tracks are available through the YouTube Audio Library.
+Licensed under the YouTube Audio Library License — free for use (including monetized videos). Attribution not required.
+
+# Images and Videos
+
+
 **Popeye the Sailor Meets Sindbad the Sailor** (1936) — Fleischer Studios  
 Director: **Dave Fleischer** (1894–1979)  
 Source: **Library of Congress**  
